@@ -9,11 +9,9 @@ Rails.application.routes.draw do
   # Маршрут страницы профиля
   get "profile", to: 'users#show', as: "profile"
 
-  # Устанавливаем root страницу на страницу профиля после входа
-  authenticated :user do
-    root "users#show", as: :authenticated_root
-  end
+  # Временный маршрут для постов
+  get "/posts", to: "posts#index"
 
-  # Корень приложения для неаутентифицированных пользователей
-  root "home#index"
+  # Корень приложения для аутентифицированных пользователей
+  root "users#show"
 end
