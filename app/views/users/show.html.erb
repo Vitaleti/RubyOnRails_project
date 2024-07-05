@@ -1,0 +1,9 @@
+<h1>Профиль пользователя</h1>
+
+<p>Email: <%= @user.email %></p>
+
+<% if user_signed_in? %> 
+  <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
+<% else %>
+  <%= button_to "Sign in", new_user_session_path %> 
+<% end %>
