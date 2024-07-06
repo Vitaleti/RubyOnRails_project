@@ -12,4 +12,12 @@
   <%= button_to "Sign in", new_user_session_path %> 
 <% end %>
 
-<a href="/posts">Посты</a>
+<h2>Posts</h2>
+<ul>
+  <% @posts.each do |post| %>
+    <li>
+      <h3><%= post.title %></h3>
+      <p><%= post.description %></p>
+    </li>
+  <% end %>
+</ul>

@@ -7,11 +7,11 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Маршрут страницы профиля
-  get "profile", to: 'users#show', as: "profile"
+  # get "profile", to: 'users#show', as: "profile"
+  get ":nickname", to: "users#show", as: "profile"
 
   # Временный маршрут для постов
   get "/posts", to: "posts#index"
 
-  # Корень приложения для аутентифицированных пользователей
-  root "users#show"
+  root "home#index"
 end
