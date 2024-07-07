@@ -3,13 +3,17 @@ class UsersController < ApplicationController
 	before_action :authenticate_user!
 
 	def show
-    sanitized_nickname = params[:nickname]
-    @naming_convention = User.find_by(nickname: sanitized_nickname)
-    if @naming_convention
+    current_nickname = params[:nickname]
+    @naming_convention = User.find_by(nickname: current_nickname)
+    if @naming_convention && @naming_convention.email == current_user.email
       @user = current_user
       @posts = @user.posts # Получаем все посты текущего пользователя
     else
-      redirect_to root_path, alert: "User not found"
+      redirect_to profile_path(current_user.nickname), alert: "User not found"
     end
+  end
+
+  def other_users
+    @users = User.all
   end
 end
