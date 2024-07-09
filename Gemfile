@@ -68,3 +68,4 @@ end
 
 gem 'devise'
 gem "tailwindcss-rails", "~> 2.6"
+gem 'image_processing', '~> 1.2'

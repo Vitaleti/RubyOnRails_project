@@ -26,7 +26,10 @@ class PostsController < ApplicationController
   def index
     current_nickname = params[:nickname]
     if current_nickname == current_user.nickname
-      @posts = Post.all
+      # Получаем идентификаторы пользователей, на которых подписан текущий пользователь
+      subscribed_users_ids = current_user.following.pluck(:id)
+      # Включаем посты текущего пользователя и пользователей, на которых он подписан
+      @posts = Post.where(user_id: subscribed_users_ids)
     else
       redirect_to profile_path(current_user.nickname), alert: "User not found"
     end
@@ -66,7 +69,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :description)
+    params.require(:post).permit(:title, :description, :image)
   end
 
   def set_post

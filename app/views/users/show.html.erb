@@ -37,6 +37,10 @@
         <h2 class="text-2xl mt-3"><%= post.title %></h2>
         <p><%= post.description %><p>
 
+        <% if post.image.attached? %>
+          <%= image_tag post.image %>
+        <% end %>
+
         <%= link_to "Edit", post_edit_path(current_user.nickname, post.id) %> |
         <%= link_to "Delete", delete_post_path(current_user.nickname, post.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>      </div>
     <% end %>

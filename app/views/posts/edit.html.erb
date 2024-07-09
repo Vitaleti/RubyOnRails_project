@@ -12,6 +12,11 @@
       <%= f.text_field :description, presence: true, placeholder: "Description" %>
     </div>
 
+    <div class="field">
+			<%= f.label :image %>
+			<%= f.file_field :image %>
+	  </div>
+
     <%= f.submit "Update post!" %>
   <% end %>
 </section>
