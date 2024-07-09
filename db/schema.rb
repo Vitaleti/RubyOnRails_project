@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_05_194158) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_07_090822) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_subscriptions_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_subscriptions_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_subscriptions_on_follower_id"
   end
 
   create_table "user_data", force: :cascade do |t|

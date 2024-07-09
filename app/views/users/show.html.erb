@@ -1,15 +1,48 @@
-<h1>Профиль пользователя</h1>
+<section class="pt-70 w-full h-screen bg-[#F39A94]">
+  <h1>Профиль пользователя</h1>
 
-<p>Email: <%= @user.email %></p>
-<p>Name: <%= @user.name %></p>
-<p>Lastname: <%= @user.lastname %></p>
-<p>Nickname: <%= @user.nickname %></p>
-<p>Age: <%= @user.age %></p>
+  <p>Email: <%= @user.email %></p>
+  <p>Name: <%= @user.name %></p>
+  <p>Lastname: <%= @user.lastname %></p>
+  <p>Nickname: <%= @user.nickname %></p>
+  <p>Age: <%= @user.age %></p>
 
-<% if user_signed_in? %> 
-  <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
-<% else %>
-  <%= button_to "Sign in", new_user_session_path %> 
-<% end %>
+  <br>
 
-<%= link_to "Posts", posts_path %> 
+  <p>Following: <%= @following_count %></p>
+  <p>Followers: <%= @followers_count %></p>
+
+  <br>
+
+  <hr>
+
+  <% if user_signed_in? %> 
+    <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
+  <% else %>
+    <%= button_to "Sign in", new_user_session_path %> 
+  <% end %>
+
+  <hr>
+
+  <%= link_to "Posts", posts_path, class: "text-2xl mt-6 text-blue-500" %>
+  <%= link_to "Users", users_path, class: "text-2xl mt-6 text-blue-500" %>
+
+  <div class="w-[1000px] mx-auto">
+    <h1 class="text-5xl mt-6">Posts</h1>
+  </div>
+
+  <div>
+    <% @posts.each do |post| %>
+      <div class="w-[1000px] mx-auto bg-[#ACCBC3] mt-6 p-5 border-2 border-black rounded-lg">
+        <h2 class="text-2xl mt-3"><%= post.title %></h2>
+        <p><%= post.description %><p>
+
+        <%= link_to "Edit", post_edit_path(current_user.nickname, post.id) %> |
+        <%= link_to "Delete", delete_post_path(current_user.nickname, post.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>      </div>
+    <% end %>
+  </div>
+  
+  <div class="w-[1000px] mx-auto">
+    <%= link_to "New post", post_new_path(current_user.nickname), class: "text-2xl mt-6 text-blue-500" %>
+  </div>
+</section>

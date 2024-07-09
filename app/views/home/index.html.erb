@@ -1,10 +1,13 @@
-<h1>Добро пожаловать на наш сайт</h1>
-<p>Пожалуйста, войдите или зарегистрируйтесь для доступа к вашему профилю</p>
+<section class="pt-70 w-full h-screen bg-[#F39A94] flex flex-col justify-center items-center">
+  <h1 class="text-[45px] text-[#30202B] font-semibold">
+    Welcome to <span class="text-[#874A59]">PhotoFlow</span>
+  </h1>
 
-<% if user_signed_in? %> 
- <div> Welcome <%= current_user.email %> </div> 
-  <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
-<% else %>
-  <%= link_to "Sign in", new_user_session_path %> 
-<% end %>
-<h1>Hello</h1>
+  <p class="text-[25px] text-[#30202B] mt-9">Log in or register</p>
+
+  <div class="mt-24">
+    <%= link_to "Sign in", new_user_session_path, class: "px-5 py-2 border border-black rounded-lg bg-[#FED6A2] text-[25px] font-extrabold italic" %>
+    <span>Or</span>
+    <%= link_to "Sign up", new_user_registration_path, class: "px-5 py-2 border border-black rounded-lg bg-[#FED6A2] text-[25px] font-extrabold italic" %>
+  </div>
+</section>

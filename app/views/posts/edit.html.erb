@@ -1,0 +1,17 @@
+<section class="pt-70 w-full h-screen">
+  <h1 class="text-5xl mt-6">Edit post</h1>
+
+  <%= form_with model: @post, url: update_post_path(params[:nickname], @post), method: :patch do |f| %>
+    <div>
+      <%= f.label :title %>
+      <%= f.text_field :title, presence: true, minlength: 2, placeholder: "Title" %>
+    </div>
+
+    <div>
+      <%= f.label :description %>
+      <%= f.text_field :description, presence: true, placeholder: "Description" %>
+    </div>
+
+    <%= f.submit "Update post!" %>
+  <% end %>
+</section>
