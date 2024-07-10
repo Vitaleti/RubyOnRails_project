@@ -20,6 +20,9 @@ class User < ApplicationRecord
   
   has_many :posts
 
+  has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: :post
+
   def follow(other_user)
     active_subscriptions.create(followed_id: other_user.id)
   end

@@ -1,22 +1,22 @@
 <section class="pt-70 w-full h-screen">
-  <h1 class="text-5xl mt-6">Edit post</h1>
+  <h1 class="text-6xl mt-6 mx-auto max-w-sm">Edit post</h1>
 
-  <%= form_with model: @post, url: update_post_path(params[:nickname], @post), method: :patch do |f| %>
-    <div>
-      <%= f.label :title %>
-      <%= f.text_field :title, presence: true, minlength: 2, placeholder: "Title" %>
-    </div>
+  <%= form_with model: @post, url: update_post_path(params[:nickname], @post), method: :patch, html: { class: "max-w-sm mx-auto" } do |f| %>
+    <div class="field mb-5 mt-7">
+			<%= f.label :title, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+			<%= f.text_field :title, presence: true, minlength: 2, placeholder: "Title", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+		</div>
 
-    <div>
-      <%= f.label :description %>
-      <%= f.text_field :description, presence: true, placeholder: "Description" %>
-    </div>
+		<div class="field mb-5">
+			<%= f.label :description, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+			<%= f.text_field :description, presence: true, placeholder: "Description", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+		</div>
 
-    <div class="field">
-			<%= f.label :image %>
-			<%= f.file_field :image %>
+		<div class="field mb-5">
+			<%= f.label "Upload file", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+			<%= f.file_field :image, class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" %>
 	  </div>
 
-    <%= f.submit "Update post!" %>
+    <%= f.submit "Update post!", class: "w-full text-gray-500 font-medium text-base bg-gray-100 file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 file:text-white rounded" %>
   <% end %>
 </section>

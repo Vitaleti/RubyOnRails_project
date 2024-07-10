@@ -1,4 +1,4 @@
-<section class="pt-70 w-full h-screen bg-[#F39A94]">
+<section class="pt-70 w-full h-full bg-slate-200">
   <h1>Профиль пользователя</h1>
 
   <p>Email: <%= @user.email %></p>
@@ -35,18 +35,28 @@
     <% @posts.each do |post| %>
       <div class="w-[1000px] mx-auto bg-[#ACCBC3] mt-6 p-5 border-2 border-black rounded-lg">
         <h2 class="text-2xl mt-3"><%= post.title %></h2>
-        <p><%= post.description %><p>
+        <p><%= post.description %></p>
+        <p><%= post.id %></p>
 
         <% if post.image.attached? %>
           <%= image_tag post.image %>
         <% end %>
 
+        <%= render 'likes/like', post: post %>
+
         <%= link_to "Edit", post_edit_path(current_user.nickname, post.id) %> |
-        <%= link_to "Delete", delete_post_path(current_user.nickname, post.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>      </div>
+        <%= link_to "Delete", delete_post_path(current_user.nickname, post.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+      </div>
     <% end %>
   </div>
   
   <div class="w-[1000px] mx-auto">
     <%= link_to "New post", post_new_path(current_user.nickname), class: "text-2xl mt-6 text-blue-500" %>
   </div>
+
+  <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+
+  <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
+    © 2023 <%= link_to "PhotoFlow", root_path, class: "hover:underline" %>. All Rights Reserved.
+  </span>
 </section>

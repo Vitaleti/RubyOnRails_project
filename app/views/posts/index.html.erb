@@ -13,6 +13,8 @@
         <%= image_tag post.image %>
       <% end %>
 
+      <%= render 'likes/like', post: post %>
+
       <% if post.user_id == current_user.id %>
         <%= link_to "Edit", post_edit_path(current_user.nickname, post.id),
           class: "text-2xl mt-6 text-blue-500"
