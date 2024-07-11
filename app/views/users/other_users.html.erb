@@ -4,11 +4,17 @@
     <h1 class="text-5xl mt-6">Users</h1>
   </div>
   
-  <div class="w-full max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+  <div class="w-full max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
     <% @users.each do |user| %>
       <div class="bg-white shadow rounded border border-transparent hover:border-blue-500 cursor-pointer">
         <div class="h-48 w-full checker-bg flex items-center justify-center p-4 text-blue-500">
-          <div class="w-32 h-32 bg-gray-100 rounded-full bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/774731/pexels-photo-774731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');"></div>
+          <div class="w-36 h-36 bg-gray-100 rounded-full bg-cover bg-center">
+            <% if user.avatar.attached? %>
+              <%= image_tag user.avatar, class: 'avatar rounded-full' %>
+            <% else %>
+              <p>No avatar available</p>
+            <% end %>
+          </div>
         </div>
 
         <div class="p-4 border-t border-gray-200">

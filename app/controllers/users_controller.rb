@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   # Требуем аутентификацию для доступа к профилю
 	before_action :authenticate_user!
+  before_action :set_user, only: [:show, :edit, :update]
 
 	def show
     current_nickname = params[:nickname]
@@ -13,6 +14,19 @@ class UsersController < ApplicationController
       @followers_count = @user.followers.count # Количество подписчиков
     else
       redirect_to profile_path(current_user.nickname)
+    end
+  end
+
+  def edit
+    @user = User.find_by(nickname: params[:nickname])
+  end
+
+  def update
+    @user = User.find_by(nickname: params[:nickname])
+    if @user.update(user_params)
+      redirect_to profile_path(@user.nickname), notice: 'Profile was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -29,5 +43,15 @@ class UsersController < ApplicationController
     else
       redirect_to users_path, alert: "User not found"
     end
+  end
+
+  private
+
+  def set_user
+    @user = User.find_by(nickname: params[:nickname])
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :lastname, :nickname, :age, :avatar)
   end
 end

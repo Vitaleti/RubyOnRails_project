@@ -17,8 +17,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
+
+  # Ассоциация для постов
   has_many :posts
+
+  # Подключение Active Storage для аватара
+  has_one_attached :avatar
 
   has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, source: :post

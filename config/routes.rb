@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   # Маршрут страницы профиля
   get ":nickname", to: "users#show", as: "profile"
 
+  get ":nickname/edit", to: "users#edit", as: "edit_profile"
+  patch ":nickname", to: "users#update", as: "update_profile"
+
   # Создание нового поста
   get ":nickname/posts/new", to: "posts#new", as: "post_new"
 
