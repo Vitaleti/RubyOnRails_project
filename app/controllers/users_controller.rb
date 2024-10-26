@@ -40,6 +40,9 @@ class UsersController < ApplicationController
 
     if @naming_convention
       @user = @naming_convention
+      @posts = @user.posts
+      @following_count = @user.following.count
+      @followers_count = @user.followers.count
     else
       redirect_to users_path, alert: "User not found"
     end

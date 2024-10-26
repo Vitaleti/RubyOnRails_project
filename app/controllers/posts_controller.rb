@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:edit, :update, :destroy]
+  before_action :set_post, only: [:edit, :update, :destroy, :show]
 
   def destroy
     if params[:nickname] == current_user.nickname
@@ -7,7 +7,7 @@ class PostsController < ApplicationController
         @post.destroy
         redirect_to profile_path(current_user.nickname), alert: "Post deleted successfully"
       else
-        edirect_to profile_path(current_user.nickname)
+        redirect_to profile_path(current_user.nickname)
       end
     else
       redirect_to profile_path(current_user.nickname), alert: "User not found"
@@ -26,9 +26,7 @@ class PostsController < ApplicationController
   def index
     current_nickname = params[:nickname]
     if current_nickname == current_user.nickname
-      # Получаем идентификаторы пользователей, на которых подписан текущий пользователь
       subscribed_users_ids = current_user.following.pluck(:id)
-      # Включаем посты текущего пользователя и пользователей, на которых он подписан
       @posts = Post.where(user_id: subscribed_users_ids)
     else
       redirect_to profile_path(current_user.nickname), alert: "User not found"
@@ -66,6 +64,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def show
+    # @post уже установлен в before_action
+  end
+
   private
 
   def post_params
@@ -73,6 +75,6 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find_by(id: params[:id])
+    @post = Post.find(params[:id])
   end
 end

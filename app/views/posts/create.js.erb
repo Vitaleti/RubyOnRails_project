@@ -1,0 +1,6 @@
+<% if @comment.persisted? %>
+  $("#comments").append("<%= j render @comment %>");
+  $("#new_comment")[0].reset();
+<% else %>
+  alert("Comment could not be created");
+<% end %>

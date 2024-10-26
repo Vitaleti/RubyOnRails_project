@@ -1,0 +1,9 @@
+<%= form_with(model: [ @post, @post.comments.build ], local: false, id: "new_comment", class: "space-y-4") do |form| %>
+  <div class="field">
+    <%= form.label :content, class: "block text-lg font-medium text-gray-700" %>
+    <%= form.text_area :content, class: "w-full mt-2 p-2 border rounded-md" %>
+  </div>
+  <div class="actions">
+    <%= form.submit "Add Comment", class: "bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" %>
+  </div>
+<% end %>

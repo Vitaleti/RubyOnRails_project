@@ -1,0 +1,15 @@
+<div id="<%= dom_id(comment) %>" class="comment bg-gray-100 p-4 rounded-lg shadow-md">
+  <% if comment.user.avatar.attached? %>
+    <%= image_tag comment.user.avatar, class: 'w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500' %>
+  <% else %>
+    <p>No avatar available</p>
+  <% end %>
+
+  <p class="text-sm text-gray-600 mt-5"><strong><%= comment.user.nickname %>:</strong></p>
+  <p class="text-gray-800 mb-2"><%= comment.content %></p>
+  <p class="text-sm text-gray-500 mb-6">Commented on: <%= comment.created_at.strftime("%B %d, %Y") %></p>
+
+  <% if comment.user_id == current_user.id %>
+    <%= link_to 'Delete', post_comment_path(comment.post, comment), method: :delete, data: { turbo_method: :delete }, class: "text-red-500 hover:text-red-700" %>
+  <% end %>
+</div>

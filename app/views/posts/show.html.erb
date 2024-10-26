@@ -1,0 +1,39 @@
+<main class="pt-70 bg-slate-200 min-h-screen py-8">
+  <div class="container mx-auto px-4">
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-full">
+      <h1 class="text-4xl font-bold text-gray-800 mb-4"><%= @post.title %></h1>
+      <p class="text-lg text-gray-700 mb-4"><%= @post.description %></p>
+
+      <% if @post.user_id == current_user.id %>
+        <div class="flex space-x-4">
+          <%= link_to "Edit", post_edit_path(current_user.nickname, @post.id),
+            class: "text-blue-500"
+          %>
+          <%= link_to "Delete", delete_post_path(current_user.nickname, @post.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+        </div>
+      <% end %>
+
+      <% if @post.image.attached? %>
+        <div class="flex justify-center mb-4">
+          <%= image_tag @post.image, class: "rounded-lg max-w-full mt-5" %>
+        </div>
+      <% end %>
+
+      <p class="text-sm text-gray-500 mb-6">Posted on: <%= @post.created_at.strftime("%B %d, %Y") %></p>
+
+      <!-- Like Button -->
+      <div class="flex items-center mb-6">
+        <%= render 'likes/like', post: @post %>
+      </div>
+
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">Comments</h2>
+      <div id="comments" class="space-y-4">
+        <%= render @post.comments %>
+      </div>
+
+      <div class="mt-8">
+        <%= render 'comments/form' %>
+      </div>
+    </div>
+  </div>
+</main>

@@ -8,8 +8,18 @@
       <div class="flex flex-wrap justify-center">
         <% @posts.each do |post| %>
           <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4 mb-8">
+            <span class="text-sm font-semibold text-gray-800 ml-4">Author: </span>
+
+            <%= link_to other_user_path(post.user.nickname), class: "text-sm text-gray-600 mb-5 hover:text-red-500" do %>
+              <%= post.user.nickname %>
+            <% end %>
+
             <div class="bg-white shadow-lg rounded-lg p-4">
-              <p class="text-xl font-semibold text-gray-800 mb-2"><%= post.title %></p>
+
+              <%= link_to show_post_path(post.id), class: "text-xl font-semibold text-gray-800 mb-2" do %>
+                <%= post.title %>
+              <% end %>
+
               <p class="text-sm text-gray-600"><%= post.description %></p>
 
               <% if post.image.attached? %>
@@ -18,6 +28,8 @@
 
               <div class="flex justify-between items-center mt-4">
                 <%= render 'likes/like', post: post %>
+
+                <span><%= post.comments.count %> Comments</span>
 
                 <% if post.user_id == current_user.id %>
                   <div class="flex space-x-4">

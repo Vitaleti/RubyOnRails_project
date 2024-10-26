@@ -1,4 +1,4 @@
-<div id="post-<%= post.id %>-likes">
+<div id="post-<%= post.id %>-likes", class="text-gray-500 hover:text-red-500">
   <% if post.liked_by?(current_user) %>
     <%= button_to 'Unlike', like_post_path(post), method: :delete, remote: true %>
   <% else %>
